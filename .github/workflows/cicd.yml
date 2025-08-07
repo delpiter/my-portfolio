@@ -20,7 +20,6 @@ jobs:
               with: 
                 node-version: 20
             - name: Install Dependencies
-              working-directory: ./gioelefoschi
               run: |
                 if [ -e yarn.lock ]; then
                 yarn install --frozen-lockfile
