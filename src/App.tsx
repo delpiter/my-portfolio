@@ -2,23 +2,22 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './App.css'
 import NavBar from './components/NavBar'
 import LandingPage from './components/Landing'
+import { CssBaseline } from '@mui/material';
 
 const theme = createTheme({
   colorSchemes: {
-    dark: true,
-  },
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
+    dark: {
+      palette: {
+        primary: { main: '#4000ff', contrastText: '#e9e9e9ff' },
+        secondary: { main: '#0f93b1ff' },
+      },
     },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
+    light: {
+      palette: {
+        primary: { main: '#e9e9e9ff', contrastText: '#494949ff' },
+        secondary: { main: '#005533' },
+
+      },
     },
   },
 });
@@ -27,6 +26,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <NavBar />
       <LandingPage />
     </ThemeProvider>

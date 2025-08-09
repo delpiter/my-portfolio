@@ -9,9 +9,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
-import { useColorScheme } from '@mui/material/styles';
+import { useColorScheme, useTheme } from '@mui/material/styles';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
+import '../App.css'
 
 function HideOnScroll({ children }: any) {
     const trigger = useScrollTrigger();
@@ -21,6 +22,7 @@ function HideOnScroll({ children }: any) {
         </Slide>
     );
 }
+
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -84,6 +86,7 @@ const navItems = ['Home', 'About', 'Contact'];
 export default function NavBar() {
 
     const { mode, setMode } = useColorScheme();
+    const theme = useTheme();
 
     if (!mode) {
         return null;
@@ -99,7 +102,6 @@ export default function NavBar() {
                             color="inherit"
                             aria-label="open drawer"
                             edge="start"
-                            //onClick={handleDrawerToggle}
                             sx={{ mr: 2, display: { sm: 'none' } }}>
                             <MenuIcon />
                         </IconButton>
@@ -108,17 +110,16 @@ export default function NavBar() {
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                         >
-                            MUI
+                            <MaterialUISwitch sx={{ m: 1 }} defaultChecked={true} onChange={(_e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+                                checked ? setMode('light') : setMode('dark');
+                            }} />
                         </Typography>
                         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                             {navItems.map((item) => (
-                                <Button key={item} sx={{ color: '#fff' }}>
+                                <Button key={item} sx={{ color: theme.palette.primary.contrastText }}>
                                     {item}
                                 </Button>
                             ))}
-                            <MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={(_e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-                                checked ? setMode('light') : setMode('dark');
-                            }} />
                         </Box>
                     </Toolbar>
                 </AppBar>
